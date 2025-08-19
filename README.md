@@ -1,55 +1,55 @@
 ## 📋 Restaurant POS System – Full Task List
 
-   __1. Core Setup__
-        - Project setup (NestJS backend, Next.js frontend, PostgreSQL DB)
-        - Authentication & Authorization (Admin, Waiter, Cashier, Kitchen Staff)
-        - Role-based Access Control (RBAC)
-        - Real-time communication (WebSockets / Socket.IO for live updates)
+__1. Core Setup__
+    - Project setup (NestJS backend, Next.js frontend, PostgreSQL DB)
+    - Authentication & Authorization (Admin, Waiter, Cashier, Kitchen Staff)
+    - Role-based Access Control (RBAC)
+    - Real-time communication (WebSockets / Socket.IO for live updates)
 
 
-   __2. User & Staff Management__
-        - Staff Roles → Waiters, Cashiers, Kitchen Staff, Managers
-        - CRUD for Users (add, update, deactivate staff)
-        - Staff assignment (e.g., waiter → tables, kitchen staff → order types)
-        - Attendance & shift management (optional advanced feature)
+__2. User & Staff Management__
+    - Staff Roles → Waiters, Cashiers, Kitchen Staff, Managers
+    - CRUD for Users (add, update, deactivate staff)
+    - Staff assignment (e.g., waiter → tables, kitchen staff → order types)
+    - Attendance & shift management (optional advanced feature)
 
-   __3. Table Management__
-        - Create/manage tables (number, capacity, zone)
-        - Table status → Available, Occupied, Reserved, Dirty
-        - Assign waiter to a table
-        - Reservation system (customer name, phone, time)
-        - Link table with current order
-        - Free/clean table after order completion
-
-
-   __4. Menu & Product Management__
-        - Categories (Appetizers, Main Course, Drinks, etc.)
-        - Products (name, price, cost, description, image, availability)
-        - Combo meals / Packages
-        - Set menu creation
-        - Add-ons & modifiers (e.g., extra cheese, no onions)
-        - Pricing rules (happy hour discounts, promotions)
+__3. Table Management__
+    - Create/manage tables (number, capacity, zone)
+    - Table status → Available, Occupied, Reserved, Dirty
+    - Assign waiter to a table
+    - Reservation system (customer name, phone, time)
+    - Link table with current order
+    - Free/clean table after order completion
 
 
-   __5. Order Management__
+__4. Menu & Product Management__
+    - Categories (Appetizers, Main Course, Drinks, etc.)
+    - Products (name, price, cost, description, image, availability)
+    - Combo meals / Packages
+    - Set menu creation
+    - Add-ons & modifiers (e.g., extra cheese, no onions)
+    - Pricing rules (happy hour discounts, promotions)
 
-    Create Order:
-        - Select table & waiter
-        - Add items (with modifiers, add-ons)
 
-    Update Order:
-        - Add/remove items
-        - Change quantity
-        - Transfer table / Split order
+__5. Order Management__
 
-    Kitchen Order Tickets (KOT):
-        - Auto-send order to kitchen display/print
-        - Track order status → Pending, Cooking, Ready, Served
+Create Order:
+    - Select table & waiter
+    - Add items (with modifiers, add-ons)
 
-    Order Linking:
-        - Dine-in order → table
-        - Takeaway order → customer info
-        - Delivery order → customer address
+Update Order:
+    - Add/remove items
+    - Change quantity
+    - Transfer table / Split order
+
+Kitchen Order Tickets (KOT):
+    - Auto-send order to kitchen display/print
+    - Track order status → Pending, Cooking, Ready, Served
+
+Order Linking:
+    - Dine-in order → table
+    - Takeaway order → customer info
+    - Delivery order → customer address
 
 __6. Billing & Payments__
         - Multiple payment methods (cash, card, mobile wallet)

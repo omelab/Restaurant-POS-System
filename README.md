@@ -33,25 +33,25 @@
 
    __5. Order Management__
 
-    __Create Order__
+    Create Order:
         - Select table & waiter
         - Add items (with modifiers, add-ons)
 
-    __Update Order__
+    Update Order:
         - Add/remove items
         - Change quantity
         - Transfer table / Split order
 
-    __Kitchen Order Tickets (KOT)__
+    Kitchen Order Tickets (KOT):
         - Auto-send order to kitchen display/print
         - Track order status → Pending, Cooking, Ready, Served
 
-    __Order Linking__
+    Order Linking:
         - Dine-in order → table
         - Takeaway order → customer info
         - Delivery order → customer address
 
-   __6. Billing & Payments__
+__6. Billing & Payments__
         - Multiple payment methods (cash, card, mobile wallet)
         - Split bill (per person, per item)
         - Discounts & coupons
@@ -59,34 +59,34 @@
         - Generate receipt (print/PDF)
         - Refunds / order cancellation handling
 
-   __7. Kitchen Management__
+__7. Kitchen Management__
         - Kitchen Display System (KDS)
         - Show pending orders with time tracking
         - Update item status (cooking → ready)
         - Auto-routing (drinks → bar, food → kitchen)
         - Notification when order ready
 
-   __8. Inventory & Stock__
+__8. Inventory & Stock__
         - Ingredients & stock items
         - Stock deduction per order (recipe-based)
         - Purchase management (supplier, invoices)
         - Low stock alerts
         - Wastage/returns tracking
 
-   __9. Front Desk / Reservations__
+__9. Front Desk / Reservations__
         - Customer reservations (walk-in, phone, online)
         - Table allocation
         - Queue management (waiting list for customers)
         - Customer preferences (VIP, allergies, notes)
 
-   __10. Hotel Integration (Plugin Feature)__
+__10. Hotel Integration (Plugin Feature)__
         (If you’re adding hotel reservation system into POS)
         - Link guest room → table or order
         - Post charges to room bill
         - Hotel guest check-in/check-out sync
 
 
-   __11. Reports & Analytics__
+__11. Reports & Analytics__
         - Daily sales report
         - Waiter performance (tips, orders served)
         - Kitchen performance (average prep time)
@@ -95,7 +95,7 @@
         - Profit & loss, best-selling items
 
 
-   __12. Extra Features (Optional but Powerful)__
+__12. Extra Features (Optional but Powerful)__
         - Customer QR code ordering (scan table QR → order directly)
         - Loyalty program (points, discounts)
         - Multi-branch management
@@ -103,23 +103,23 @@
         - Mobile app for waiters (take orders on phone/tablet)
         - Admin dashboard (manage multiple branches, analytics)
 
-## 📐 Project Architecture (Recommended)
+📐 Project Architecture (Recommended)
 
-   __Backend (NestJS + PostgreSQL)__
+__Backend (NestJS + PostgreSQL)__
 
-       __Modules:__
-            - Auth (JWT, roles, permissions)
-            - User (staff management)
-            - Table (table CRUD & reservations)
-            - Menu (products, categories, packages)
-            - Order (dine-in, takeaway, delivery)
-            - Payment (billing, receipts)
-            - Kitchen (order tracking, status)
-            - Inventory (ingredients, stock)
-            - Report (sales, analytics)
-            - Hotel (plugin integration if needed)
+    Modules:
+        - Auth (JWT, roles, permissions)
+        - User (staff management)
+        - Table (table CRUD & reservations)
+        - Menu (products, categories, packages)
+        - Order (dine-in, takeaway, delivery)
+        - Payment (billing, receipts)
+        - Kitchen (order tracking, status)
+        - Inventory (ingredients, stock)
+        - Report (sales, analytics)
+        - Hotel (plugin integration if needed)
 
-###Frontend (Next.js)
+## Frontend (Next.js)
 
    __Admin Panel__
         Dashboard (sales, performance)
@@ -924,7 +924,7 @@ export class TablesModule {}
 
 ## 🍽️ Table Management – Task List
 
-###1. Database & Entity Setup
+    __1. Database & Entity Setup__
 
         - Create tables entity/model in PostgreSQL with fields:
             - id (PK)

@@ -33,23 +33,23 @@
 
    __5. Order Management__
 
-       __Create Order__
-            - Select table & waiter
-            - Add items (with modifiers, add-ons)
+    __Create Order__
+        - Select table & waiter
+        - Add items (with modifiers, add-ons)
 
-       __Update Order__
-            - Add/remove items
-            - Change quantity
-            - Transfer table / Split order
+    __Update Order__
+        - Add/remove items
+        - Change quantity
+        - Transfer table / Split order
 
-       __Kitchen Order Tickets (KOT)__
-            - Auto-send order to kitchen display/print
-            - Track order status → Pending, Cooking, Ready, Served
+    __Kitchen Order Tickets (KOT)__
+        - Auto-send order to kitchen display/print
+        - Track order status → Pending, Cooking, Ready, Served
 
-       __Order Linking__
-            - Dine-in order → table
-            - Takeaway order → customer info
-            - Delivery order → customer address
+    __Order Linking__
+        - Dine-in order → table
+        - Takeaway order → customer info
+        - Delivery order → customer address
 
    __6. Billing & Payments__
         - Multiple payment methods (cash, card, mobile wallet)
@@ -138,7 +138,7 @@
 
 ## 🚀 Restaurant POS Development Roadmap
 
-    ###📍 Phase 1: Foundation (Core Setup):
+###📍 Phase 1: Foundation (Core Setup):
         🔹 Goal: Get the backend + frontend running with authentication and basic user roles.
 
    __Tasks:__
@@ -151,7 +151,7 @@
 
 
 
-    ###📍 Phase 2: Staff & Table Management
+###📍 Phase 2: Staff & Table Management
         🔹 Goal: Manage staff and tables.
 
        __Tasks:__
@@ -166,7 +166,7 @@
         ✅ Deliverable: Admin can create tables, assign waiters, and see reservation dashboard.
 
 
-    ###📍 Phase 3: Menu & Product Management
+###📍 Phase 3: Menu & Product Management
         🔹 Goal: Manage restaurant menu items.
 
        __Tasks:__
@@ -177,7 +177,7 @@
             - Menu display in frontend with category filtering.
         ✅ Deliverable: Admin can manage menu; POS can display all menu items.
 
-    ###📍 Phase 4: Order Management
+###📍 Phase 4: Order Management
         🔹 Goal: Enable waiters to take orders.
 
        __Tasks:__
@@ -188,7 +188,7 @@
             - Kitchen Order Ticket (KOT) auto-generated on order confirm.
         ✅ Deliverable: Waiter can take table orders, and kitchen staff sees them.
 
-    ###📍 Phase 5: Kitchen Management (KDS)
+###📍 Phase 5: Kitchen Management (KDS)
         🔹 Goal: Kitchen staff can manage cooking flow.
 
        __Tasks:__
@@ -197,7 +197,7 @@
             - Auto notifications when order ready.
         ✅ Deliverable: Kitchen team manages orders digitally.
 
-    ###📍 Phase 6: Billing & Payments
+###📍 Phase 6: Billing & Payments
         🔹 Goal: Complete the order lifecycle with billing.
 
        __Tasks:__
@@ -209,7 +209,7 @@
         ✅ Deliverable: POS can generate bills and record payments.
 
 
-    ###📍 Phase 6: Billing & Payments
+###📍 Phase 6: Billing & Payments
         🔹 Goal: Complete the order lifecycle with billing.
 
        __Tasks:__
@@ -221,7 +221,7 @@
         ✅ Deliverable: POS can generate bills and record payments.
 
 
-    ###📍 Phase 7: Inventory & Stock
+###📍 Phase 7: Inventory & Stock
         🔹 Goal: Track stock usage and manage purchases.
 
        __Tasks:__
@@ -233,7 +233,7 @@
         ✅ Deliverable: Inventory auto-reduces when food is sold.
 
 
-    ###📍 Phase 8: Reports & Analytics
+###📍 Phase 8: Reports & Analytics
         🔹 Goal: Business insights.
 
        __Tasks:__
@@ -245,7 +245,7 @@
         ✅ Deliverable: Admin dashboard with full analytics.
 
 
-    ###📍 Phase 9: Advanced Features
+###📍 Phase 9: Advanced Features
         🔹 Optional but powerful add-ons.
 
        __Tasks:__
@@ -259,7 +259,7 @@
 
 
 
-    ###📐 Suggested Build Order (Milestones)
+###📐 Suggested Build Order (Milestones)
         - Core Auth & RBAC → Phase 1
         - Tables + Waiters → Phase 2
         - Menu + Products → Phase 3
@@ -924,7 +924,7 @@ export class TablesModule {}
 
 ## 🍽️ Table Management – Task List
 
-    ###1. Database & Entity Setup
+###1. Database & Entity Setup
 
         - Create tables entity/model in PostgreSQL with fields:
             - id (PK)
@@ -937,7 +937,7 @@ export class TablesModule {}
         - Seed initial tables (e.g., 20 tables).
 
 
-    ###2. Backend (NestJS) – API Development
+###2. Backend (NestJS) – API Development
 
         - Create Table APIs:
             - POST /tables → Add new table
@@ -958,7 +958,7 @@ export class TablesModule {}
             - When a waiter opens an order → link it to a table
             - When the order is closed → free the table
 
-    ###3. Frontend (NextJS) – UI/UX
+###3. Frontend (NextJS) – UI/UX
 
         - Table Dashboard (Grid View):
             - Show all tables in a visual grid/floor plan
@@ -983,7 +983,7 @@ export class TablesModule {}
             - Allow admin to rearrange tables visually
 
 
-    ###4. Extra Features (Advanced)
+###4. Extra Features (Advanced)
 
         🔄 Auto Refresh Table Status (WebSockets/Socket.io for real-time updates)
         📱 QR Code per Table → customer can scan & view menu/order
@@ -993,7 +993,7 @@ export class TablesModule {}
             - Average dining time
             - Most used tables/zones
 
-    ###5. Task Breakdown (Project Steps)
+###5. Task Breakdown (Project Steps)
         - DB Migration – Create tables table
         - NestJS Table Module – CRUD + status APIs
         - NextJS Table Dashboard – Grid display with status colors

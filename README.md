@@ -1,4 +1,5 @@
 # 🍽️ Restaurant POS System  
+![Restaurant POS System](./screenshot.png)
 
 A full-featured **Restaurant Point of Sale (POS)** system built with **NestJS (Backend)**, **Next.js (Frontend)**, and **PostgreSQL (Database)**.  
 The system supports **staff management, table management, menu & orders, billing & payments, kitchen display system (KDS), inventory, analytics, and advanced features** like QR code ordering, loyalty programs, and hotel integration.  
@@ -368,8 +369,8 @@ export class TableEntity {
 
 ```bash
 # Clone repo
-git clone https://github.com/your-org/restaurant-pos.git
-cd restaurant-pos
+git clone https://github.com/omelab/Restaurant-POS-System.git
+cd Restaurant-POS-System
 
 # Backend Setup
 cd backend

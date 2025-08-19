@@ -138,7 +138,7 @@
 
 ## 🚀 Restaurant POS Development Roadmap
 
-###📍 Phase 1: Foundation (Core Setup):
+📍 Phase 1: Foundation (Core Setup):
         🔹 Goal: Get the backend + frontend running with authentication and basic user roles.
 
    __Tasks:__
@@ -151,7 +151,7 @@
 
 
 
-###📍 Phase 2: Staff & Table Management
+📍 Phase 2: Staff & Table Management
         🔹 Goal: Manage staff and tables.
 
        __Tasks:__
@@ -166,7 +166,7 @@
         ✅ Deliverable: Admin can create tables, assign waiters, and see reservation dashboard.
 
 
-###📍 Phase 3: Menu & Product Management
+📍 Phase 3: Menu & Product Management
         🔹 Goal: Manage restaurant menu items.
 
        __Tasks:__
@@ -177,7 +177,7 @@
             - Menu display in frontend with category filtering.
         ✅ Deliverable: Admin can manage menu; POS can display all menu items.
 
-###📍 Phase 4: Order Management
+📍 Phase 4: Order Management
         🔹 Goal: Enable waiters to take orders.
 
        __Tasks:__
@@ -188,7 +188,7 @@
             - Kitchen Order Ticket (KOT) auto-generated on order confirm.
         ✅ Deliverable: Waiter can take table orders, and kitchen staff sees them.
 
-###📍 Phase 5: Kitchen Management (KDS)
+📍 Phase 5: Kitchen Management (KDS)
         🔹 Goal: Kitchen staff can manage cooking flow.
 
        __Tasks:__
@@ -197,7 +197,7 @@
             - Auto notifications when order ready.
         ✅ Deliverable: Kitchen team manages orders digitally.
 
-###📍 Phase 6: Billing & Payments
+📍 Phase 6: Billing & Payments
         🔹 Goal: Complete the order lifecycle with billing.
 
        __Tasks:__
@@ -209,7 +209,7 @@
         ✅ Deliverable: POS can generate bills and record payments.
 
 
-###📍 Phase 6: Billing & Payments
+📍 Phase 6: Billing & Payments
         🔹 Goal: Complete the order lifecycle with billing.
 
        __Tasks:__
@@ -221,7 +221,7 @@
         ✅ Deliverable: POS can generate bills and record payments.
 
 
-###📍 Phase 7: Inventory & Stock
+📍 Phase 7: Inventory & Stock
         🔹 Goal: Track stock usage and manage purchases.
 
        __Tasks:__
@@ -233,7 +233,7 @@
         ✅ Deliverable: Inventory auto-reduces when food is sold.
 
 
-###📍 Phase 8: Reports & Analytics
+📍 Phase 8: Reports & Analytics
         🔹 Goal: Business insights.
 
        __Tasks:__
@@ -245,7 +245,7 @@
         ✅ Deliverable: Admin dashboard with full analytics.
 
 
-###📍 Phase 9: Advanced Features
+📍 Phase 9: Advanced Features
         🔹 Optional but powerful add-ons.
 
        __Tasks:__

@@ -234,451 +234,68 @@ The system supports **staff management, table management, menu & orders, billing
  └── nest-cli.json
 
 ```
+# 🍽️ Restaurant POS – Database Schema & Modules
 
-## 🍽️ Restaurant POS – Database Schema (ERD)
+A complete **Restaurant Point of Sale (POS) System** design covering **Database Schema (ERD), NestJS TypeORM Entities, APIs, and Frontend Modules**.
 
-   __1. User & Roles__
+This project aims to manage restaurants efficiently with **User Roles, Table Management, Menu, Orders, Payments, Kitchen Workflow, and Inventory.**
 
-```markdown
-    ## roles
+---
 
-    id (PK)
-    name (Admin, Waiter, Cashier, Kitchen, Manager)
+## 📌 Features
 
-    ## users
+* 👥 **Users & Roles** – Role-based access (Admin, Waiter, Cashier, Kitchen, Manager).
+* 🍽️ **Table Management** – Reservation, occupancy, status tracking.
+* 📋 **Menu & Products** – Categories, products, modifiers, packages/combos.
+* 🛎️ **Orders & Billing** – Order lifecycle, items, modifiers, kitchen integration.
+* 💳 **Payments** – Multi-payment methods (cash, card, wallet).
+* 👨‍🍳 **Kitchen Management** – Kitchen Order Ticket (KOT) handling.
+* 📦 **Inventory & Stock** – Ingredients, recipes, purchases, usage tracking.
+* 📊 **Analytics** – Table occupancy, sales reports, and performance insights.
 
-    id (PK)
-    name
-    email
-    password
-    role_id (FK → roles.id)
-    status (active/inactive)
-    created_at
-    updated_at
-```
+---
 
-   __2. Table Management _-
+## 🗄️ Database Schema (ERD)
 
-```markdown
-    tables
-    ---------
-    id (PK)
-    table_number (unique)
-    capacity
-    zone (e.g., Hall A, Rooftop)
-    status (available, occupied, reserved, dirty)
-    current_order_id (FK → orders.id, nullable)
-    created_at
-    updated_at
+Entities are divided into 7 modules:
 
-    reservations
-    ---------
-    id (PK)
-    table_id (FK → tables.id)
-    customer_name
-    customer_phone
-    reservation_time
-    status (reserved, cancelled, completed)
-    created_at
-    updated_at
-```
+1. **Users & Roles**
+2. **Table Management & Reservations**
+3. **Menu & Products (with Modifiers & Packages)**
+4. **Orders & Order Items**
+5. **Payments & Bills**
+6. **Kitchen Orders**
+7. **Inventory & Stock Management**
 
-   __3. Menu & Products__
+🔗 **Key Relationships**:
 
-```markdown
-    categories
-    ---------
-    id (PK)
-    name
-    description
-    created_at
-    updated_at
+* One Role → Many Users
+* One Table → Many Reservations & Orders
+* One Category → Many Products
+* One Product → Many Order Items
+* One Order → Many Order Items & One Bill
+* One Order Item → One Kitchen Order
+* One Product → Many Ingredients (via Recipes)
+* One Purchase → Many Purchase Items
 
-    products
-    ---------
-    id (PK)
-    category_id (FK → categories.id)
-    name
-    description
-    price
-    cost_price
-    is_available (boolean)
-    image_url
-    created_at
-    updated_at
+📑 *(Full schema included in `/docs/database-schema.md`)*
 
-    product_modifiers
-    ---------
-    id (PK)
-    product_id (FK → products.id)
-    name (e.g., Extra Cheese)
-    price
-    created_at
-    updated_at
+---
 
-    packages (for combo/set meals)
-    ---------
-    id (PK)
-    name
-    description
-    price
-    created_at
-    updated_at
+## ⚡ NestJS Backend
 
-    package_items
-    ---------
-    id (PK)
-    package_id (FK → packages.id)
-    product_id (FK → products.id)
-    quantity
-```
+### 📂 Modules
 
-   __4. Orders__
+* `users` → Authentication, Role Management
+* `tables` → Table CRUD, Reservations, Status Handling
+* `orders` → Order lifecycle & linking with tables
+* `payments` → Bill & payment handling
+* `kitchen` → Kitchen order tracking
+* `inventory` → Stock, purchases, recipes
 
-```markdown
-    orders
-    ---------
-    id (PK)
-    table_id (FK → tables.id, nullable for takeaway/delivery)
-    waiter_id (FK → users.id)
-    status (pending, cooking, ready, served, paid, cancelled)
-    order_type (dine-in, takeaway, delivery)
-    created_at
-    updated_at
-
-    order_items
-    ---------
-    id (PK)
-    order_id (FK → orders.id)
-    product_id (FK → products.id)
-    quantity
-    price
-    modifier_ids (JSON array → [1,2,3])
-    status (pending, cooking, ready, served)
-```
-
-   __5. Payments__
-
-```markdown
-    payments
-    ---------
-    id (PK)
-    order_id (FK → orders.id)
-    amount
-    payment_method (cash, card, wallet)
-    status (paid, refunded, partial)
-    transaction_id (optional)
-    created_at
-    updated_at
-
-    bills
-    ---------
-    id (PK)
-    order_id (FK → orders.id)
-    subtotal
-    tax
-    service_charge
-    discount
-    total
-    created_at
-    updated_at
-```
-
-   __6. Kitchen Management__
-
-```markdown
-    kitchen_orders
-    ---------
-    id (PK)
-    order_item_id (FK → order_items.id)
-    status (pending, cooking, ready, served)
-    assigned_to (FK → users.id → kitchen staff, nullable)
-    started_at
-    finished_at
-```
-
-   ___7. Inventory & Stock__
-
-```markdown
-    ingredients
-    ---------
-    id (PK)
-    name
-    unit (kg, liter, pcs)
-    stock_quantity
-    reorder_level
-    created_at
-    updated_at
-
-    recipes
-    ---------
-    id (PK)
-    product_id (FK → products.id)
-    ingredient_id (FK → ingredients.id)
-    quantity_used
-
-    purchases
-    ---------
-    id (PK)
-    supplier_name
-    invoice_number
-    total_amount
-    created_at
-    updated_at
-
-    purchase_items
-    ---------
-    id (PK)
-    purchase_id (FK → purchases.id)
-    ingredient_id (FK → ingredients.id)
-    quantity
-    unit_price
-```
-
-    ## 🔗 Key Relationships
-        - One Role → Many Users
-        - One Table → Many Reservations
-        - One Category → Many Products
-        - One Product → Many Order Items
-        - One Order → Many Order Items & One Bill
-        - One Order Item → One Kitchen Order
-        - One Product → Many Ingredients (via recipes)
-        - One Purchase → Many Purchase Items
-
-
-    ## ✅ ERD Flow
-       - Users (Staff) → Manage Tables + Reservations
-       - Tables → Link with Orders
-       - Orders → Have Order Items → Linked to Products
-       - Products → Linked to Recipes → Reduce Ingredients (Inventory)
-       - Orders → Linked to Bills & Payments
-       - Kitchen Orders → Track order status
-
-
-
-    ## NestJS TypeORM entity structure
+### 🛠️ Example Entity (Table)
 
 ```ts
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-  JoinColumn,
-} from "typeorm";
-
-// ------------------------- Company -------------------------
-@Entity("companies")
-export class Company {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @OneToMany(() => Branch, (branch) => branch.company)
-  branches: Branch[];
-}
-
-// ------------------------- Branch -------------------------
-@Entity("branches")
-export class Branch {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @ManyToOne(() => Company, (company) => company.branches)
-  @JoinColumn({ name: "company_id" })
-  company: Company;
-
-  @OneToMany(() => TableEntity, (table) => table.branch)
-  tables: TableEntity[];
-}
-
-// ------------------------- Table -------------------------
-@Entity("tables")
-export class TableEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  table_number: string;
-
-  @Column()
-  capacity: number;
-
-  @ManyToOne(() => Branch, (branch) => branch.tables)
-  @JoinColumn({ name: "branch_id" })
-  branch: Branch;
-
-  @OneToMany(() => Reservation, (reservation) => reservation.table)
-  reservations: Reservation[];
-
-  @OneToMany(() => Order, (order) => order.table)
-  orders: Order[];
-}
-
-// ------------------------- Reservation -------------------------
-@Entity("reservations")
-export class Reservation {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  customer_name: string;
-
-  @Column()
-  customer_phone: string;
-
-  @Column({ type: "timestamp" })
-  reservation_time: Date;
-
-  @ManyToOne(() => TableEntity, (table) => table.reservations)
-  @JoinColumn({ name: "table_id" })
-  table: TableEntity;
-}
-
-// ------------------------- Category -------------------------
-@Entity("categories")
-export class Category {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @OneToMany(() => Product, (product) => product.category)
-  products: Product[];
-}
-
-// ------------------------- Product -------------------------
-@Entity("products")
-export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column("decimal", { precision: 10, scale: 2 })
-  price: number;
-
-  @ManyToOne(() => Category, (category) => category.products)
-  @JoinColumn({ name: "category_id" })
-  category: Category;
-
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
-  orderItems: OrderItem[];
-}
-
-// ------------------------- Order -------------------------
-@Entity("orders")
-export class Order {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  order_time: Date;
-
-  @ManyToOne(() => TableEntity, (table) => table.orders)
-  @JoinColumn({ name: "table_id" })
-  table: TableEntity;
-
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
-  items: OrderItem[];
-
-  @OneToMany(() => Payment, (payment) => payment.order)
-  payments: Payment[];
-}
-
-// ------------------------- Order Item -------------------------
-@Entity("order_items")
-export class OrderItem {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @ManyToOne(() => Order, (order) => order.items)
-  @JoinColumn({ name: "order_id" })
-  order: Order;
-
-  @ManyToOne(() => Product, (product) => product.orderItems)
-  @JoinColumn({ name: "product_id" })
-  product: Product;
-
-  @Column("int")
-  quantity: number;
-
-  @Column("decimal", { precision: 10, scale: 2 })
-  price: number;
-}
-
-// ------------------------- Payment -------------------------
-@Entity("payments")
-export class Payment {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @ManyToOne(() => Order, (order) => order.payments)
-  @JoinColumn({ name: "order_id" })
-  order: Order;
-
-  @Column("decimal", { precision: 10, scale: 2 })
-  amount: number;
-
-  @Column()
-  method: string; // cash, card, etc.
-
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  payment_time: Date;
-}
-
-// ------------------------- Employee -------------------------
-@Entity("employees")
-export class Employee {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  role: string; // waiter, cashier, chef
-
-  @Column()
-  phone: string;
-}
-
-// ------------------------- Inventory -------------------------
-@Entity("inventory")
-export class Inventory {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  item_name: string;
-
-  @Column("int")
-  quantity: number;
-
-  @Column("varchar")
-  unit: string;
-
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  updated_at: Date;
-}
-```
-
-    ## Tables Module Example
-
-```ts
-// ==================== entities/table.entity.ts ====================
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Reservation } from "../../reservations/entities/reservation.entity";
-import { Order } from "../../orders/entities/order.entity";
-
 @Entity("tables")
 export class TableEntity {
   @PrimaryGeneratedColumn()
@@ -699,200 +316,87 @@ export class TableEntity {
   @OneToMany(() => Order, (order) => order.table)
   orders: Order[];
 }
-
-// ==================== dto/create-table.dto.ts ====================
-export class CreateTableDto {
-  table_number: string;
-  capacity: number;
-  status?: string;
-}
-
-// ==================== dto/update-table.dto.ts ====================
-export class UpdateTableDto {
-  table_number?: string;
-  capacity?: number;
-  status?: string;
-}
-
-// ==================== tables.service.ts ====================
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { TableEntity } from "./entities/table.entity";
-import { CreateTableDto } from "./dto/create-table.dto";
-import { UpdateTableDto } from "./dto/update-table.dto";
-
-@Injectable()
-export class TablesService {
-  constructor(
-    @InjectRepository(TableEntity)
-    private tableRepository: Repository<TableEntity>
-  ) {}
-
-  create(createTableDto: CreateTableDto) {
-    const table = this.tableRepository.create(createTableDto);
-    return this.tableRepository.save(table);
-  }
-
-  findAll() {
-    return this.tableRepository.find({ relations: ["reservations", "orders"] });
-  }
-
-  async findOne(id: number) {
-    const table = await this.tableRepository.findOne({
-      where: { id },
-      relations: ["reservations", "orders"],
-    });
-    if (!table) throw new NotFoundException(`Table ${id} not found`);
-    return table;
-  }
-
-  async update(id: number, updateTableDto: UpdateTableDto) {
-    await this.tableRepository.update(id, updateTableDto);
-    return this.findOne(id);
-  }
-
-  async remove(id: number) {
-    const table = await this.findOne(id);
-    return this.tableRepository.remove(table);
-  }
-}
-
-// ==================== tables.controller.ts ====================
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Put,
-  Delete,
-} from "@nestjs/common";
-import { TablesService } from "./tables.service";
-import { CreateTableDto } from "./dto/create-table.dto";
-import { UpdateTableDto } from "./dto/update-table.dto";
-
-@Controller("tables")
-export class TablesController {
-  constructor(private readonly tablesService: TablesService) {}
-
-  @Post()
-  create(@Body() createTableDto: CreateTableDto) {
-    return this.tablesService.create(createTableDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.tablesService.findAll();
-  }
-
-  @Get(":id")
-  findOne(@Param("id") id: number) {
-    return this.tablesService.findOne(id);
-  }
-
-  @Put(":id")
-  update(@Param("id") id: number, @Body() updateTableDto: UpdateTableDto) {
-    return this.tablesService.update(id, updateTableDto);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: number) {
-    return this.tablesService.remove(id);
-  }
-}
-
-// ==================== tables.module.ts ====================
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { TablesService } from "./tables.service";
-import { TablesController } from "./tables.controller";
-import { TableEntity } from "./entities/table.entity";
-
-@Module({
-  imports: [TypeOrmModule.forFeature([TableEntity])],
-  providers: [TablesService],
-  controllers: [TablesController],
-})
-export class TablesModule {}
 ```
 
-## 🍽️ Table Management – Task List
+📑 *(More entities available in `/src/entities/`)*
 
-    __1. Database & Entity Setup__
+---
 
-        - Create tables entity/model in PostgreSQL with fields:
-            - id (PK)
-            - table_number (unique identifier, e.g., T1, T2, etc.)
-            - capacity (number of seats)
-            - status (available, occupied, reserved, dirty)
-            - location/zone (optional: e.g., Hall A, Rooftop, etc.)
-            - current_order_id (FK to orders, nullable)
-            - created_at, updated_at
-        - Seed initial tables (e.g., 20 tables).
+## 🎯 Table Management – Task List
 
+✅ **1. Database & Entity Setup**
 
-###2. Backend (NestJS) – API Development
+* Create `tables` entity with fields: id, table\_number, capacity, status, zone, current\_order\_id
+* Seed initial tables (20 tables default)
 
-        - Create Table APIs:
-            - POST /tables → Add new table
-            - GET /tables → List all tables with status
-            - GET /tables/:id → Get table details
-            - PATCH /tables/:id → Update table info (capacity, location)
-            - DELETE /tables/:id → Soft delete table (if needed)
+✅ **2. Backend (NestJS) APIs**
 
-        - Table Status Management
-            - PATCH /tables/:id/status → Change table status (available, occupied, reserved, dirty)
-            - Auto-update status when order is placed/closed
+* `POST /tables` → Create table
+* `GET /tables` → List tables with status
+* `PATCH /tables/:id/status` → Update status
+* Reservation API: `/tables/:id/reserve`, `/tables/:id/cancel-reservation`
+* Auto link orders with tables
 
-        - Reservation API:
-            - POST /tables/:id/reserve → Reserve a table for a customer
-            - PATCH /tables/:id/cancel-reservation
+✅ **3. Frontend (Next.js)**
 
-        - Integration with Orders:
-            - When a waiter opens an order → link it to a table
-            - When the order is closed → free the table
+* Table Dashboard (Grid View with colors for status)
+* Table Details Modal (capacity, waiter, reservation, order info)
+* Reservation Form (customer details + time)
+* Waiter Assignment per table
+* Drag & Drop Floor Plan *(future feature)*
 
-###3. Frontend (NextJS) – UI/UX
+✅ **4. Extra Features**
 
-        - Table Dashboard (Grid View):
-            - Show all tables in a visual grid/floor plan
-            - Different colors for status:
-                🟩 Available
-                🟨 Reserved
-                🟥 Occupied
-                🟦 Dirty
+* 🔄 Real-time status updates (WebSockets)
+* 📱 QR Code per table (scan → menu → order)
+* 🧹 Dirty → Clean flow after payment
+* 📊 Analytics: occupancy, average dining time, top tables
 
-        - Table Details Modal
-            - Capacity, current order, waiter assigned
-            - Actions: Reserve, Occupy, Free, Mark Dirty
+---
 
-        - Reservation Form
-            - Customer name, phone number
-            - Time of reservation
-            - Assign waiter (optional)
-            - Waiter Assignment
-            - Assign waiter per table
-            - Show waiter name on table card
-            - Drag & Drop Floor Plan (Future Feature)
-            - Allow admin to rearrange tables visually
+## 🚀 Tech Stack
 
+* **Backend**: [NestJS](https://nestjs.com/) + [TypeORM](https://typeorm.io/) + PostgreSQL
+* **Frontend**: [Next.js](https://nextjs.org/) + TailwindCSS
+* **Real-time**: WebSockets (Socket.io)
+* **Auth**: JWT + Role-based Access
+* **Deployment**: Docker + Nginx
 
-###4. Extra Features (Advanced)
+---
 
-        🔄 Auto Refresh Table Status (WebSockets/Socket.io for real-time updates)
-        📱 QR Code per Table → customer can scan & view menu/order
-        🧹 Dirty → Clean Flow → after payment, table becomes “dirty” until cleaned
-        📊 Analytics
-            - Table occupancy rate
-            - Average dining time
-            - Most used tables/zones
+## 📌 Project Setup
 
-###5. Task Breakdown (Project Steps)
-        - DB Migration – Create tables table
-        - NestJS Table Module – CRUD + status APIs
-        - NextJS Table Dashboard – Grid display with status colors
-        - Reservation + Waiter assignment integration
-        - Order-Table linking (when new order created)
-        - Real-time updates with WebSockets
-        - Optional: Floor plan drag-drop + QR ordering
+```bash
+# Clone repo
+git clone https://github.com/your-org/restaurant-pos.git
+cd restaurant-pos
+
+# Backend Setup
+cd backend
+npm install
+npm run start:dev
+
+# Frontend Setup
+cd frontend
+npm install
+npm run dev
+```
+
+Database migrations are included under `/migrations`.
+
+---
+
+## 📊 ERD Flow Summary
+
+* **Users** → Manage Tables + Reservations
+* **Tables** → Link with Orders
+* **Orders** → Contain Order Items → Linked to Products
+* **Products** → Linked to Recipes → Reduce Ingredients (Inventory)
+* **Orders** → Linked to Bills & Payments
+* **Kitchen Orders** → Track Cooking Status
+
+---
+
+## 📜 License
+
+MIT License – free to use & modify.

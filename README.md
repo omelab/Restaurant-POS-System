@@ -1,19 +1,19 @@
 ## 📋 Restaurant POS System – Full Task List
 
-    __ 1. Core Setup __
+   __1. Core Setup__
         - Project setup (NestJS backend, Next.js frontend, PostgreSQL DB)
         - Authentication & Authorization (Admin, Waiter, Cashier, Kitchen Staff)
         - Role-based Access Control (RBAC)
         - Real-time communication (WebSockets / Socket.IO for live updates)
 
 
-    __ 2. User & Staff Management __
+   __2. User & Staff Management__
         - Staff Roles → Waiters, Cashiers, Kitchen Staff, Managers
         - CRUD for Users (add, update, deactivate staff)
         - Staff assignment (e.g., waiter → tables, kitchen staff → order types)
         - Attendance & shift management (optional advanced feature)
 
-    __ 3. Table Management __
+   __3. Table Management__
         - Create/manage tables (number, capacity, zone)
         - Table status → Available, Occupied, Reserved, Dirty
         - Assign waiter to a table
@@ -22,7 +22,7 @@
         - Free/clean table after order completion
 
 
-    __ 4. Menu & Product Management __
+   __4. Menu & Product Management__
         - Categories (Appetizers, Main Course, Drinks, etc.)
         - Products (name, price, cost, description, image, availability)
         - Combo meals / Packages
@@ -31,27 +31,27 @@
         - Pricing rules (happy hour discounts, promotions)
 
 
-    __ 5. Order Management __
+   __5. Order Management__
 
-        __ Create Order __
+       __Create Order__
             - Select table & waiter
             - Add items (with modifiers, add-ons)
 
-        __ Update Order __
+       __Update Order__
             - Add/remove items
             - Change quantity
             - Transfer table / Split order
 
-        __ Kitchen Order Tickets (KOT) __
+       __Kitchen Order Tickets (KOT)__
             - Auto-send order to kitchen display/print
             - Track order status → Pending, Cooking, Ready, Served
 
-        __ Order Linking __
+       __Order Linking__
             - Dine-in order → table
             - Takeaway order → customer info
             - Delivery order → customer address
 
-    __ 6. Billing & Payments __
+   __6. Billing & Payments__
         - Multiple payment methods (cash, card, mobile wallet)
         - Split bill (per person, per item)
         - Discounts & coupons
@@ -59,34 +59,34 @@
         - Generate receipt (print/PDF)
         - Refunds / order cancellation handling
 
-    __ 7. Kitchen Management __
+   __7. Kitchen Management__
         - Kitchen Display System (KDS)
         - Show pending orders with time tracking
         - Update item status (cooking → ready)
         - Auto-routing (drinks → bar, food → kitchen)
         - Notification when order ready
 
-    __ 8. Inventory & Stock __
+   __8. Inventory & Stock__
         - Ingredients & stock items
         - Stock deduction per order (recipe-based)
         - Purchase management (supplier, invoices)
         - Low stock alerts
         - Wastage/returns tracking
 
-    __ 9. Front Desk / Reservations __
+   __9. Front Desk / Reservations__
         - Customer reservations (walk-in, phone, online)
         - Table allocation
         - Queue management (waiting list for customers)
         - Customer preferences (VIP, allergies, notes)
 
-    __ 10. Hotel Integration (Plugin Feature) __
+   __10. Hotel Integration (Plugin Feature)__
         (If you’re adding hotel reservation system into POS)
         - Link guest room → table or order
         - Post charges to room bill
         - Hotel guest check-in/check-out sync
 
 
-    __ 11. Reports & Analytics __
+   __11. Reports & Analytics__
         - Daily sales report
         - Waiter performance (tips, orders served)
         - Kitchen performance (average prep time)
@@ -95,7 +95,7 @@
         - Profit & loss, best-selling items
 
 
-    __ 12. Extra Features (Optional but Powerful) __
+   __12. Extra Features (Optional but Powerful)__
         - Customer QR code ordering (scan table QR → order directly)
         - Loyalty program (points, discounts)
         - Multi-branch management
@@ -105,9 +105,9 @@
 
 ## 📐 Project Architecture (Recommended)
 
-    __ Backend (NestJS + PostgreSQL) __
+   __Backend (NestJS + PostgreSQL)__
 
-        __ Modules: __
+       __Modules:__
             - Auth (JWT, roles, permissions)
             - User (staff management)
             - Table (table CRUD & reservations)
@@ -119,16 +119,16 @@
             - Report (sales, analytics)
             - Hotel (plugin integration if needed)
 
-### Frontend (Next.js)
+###Frontend (Next.js)
 
-    __ Admin Panel __
+   __Admin Panel__
         Dashboard (sales, performance)
         Staff management
         Menu management
         Reports
         Inventory
 
-    __ POS Interface __
+   __POS Interface__
         Table grid view
         Order screen (add items, assign waiter)
         Payment screen
@@ -138,10 +138,10 @@
 
 ## 🚀 Restaurant POS Development Roadmap
 
-    ### 📍 Phase 1: Foundation (Core Setup):
+    ###📍 Phase 1: Foundation (Core Setup):
         🔹 Goal: Get the backend + frontend running with authentication and basic user roles.
 
-    __ Tasks: __
+   __Tasks:__
         - Setup NestJS project with PostgreSQL (TypeORM/Prisma/Sequelize).
         - Setup Next.js project for frontend.
         - Configure RBAC (Role-Based Access Control) → Admin, Waiter, Cashier, Kitchen.
@@ -151,10 +151,10 @@
 
 
 
-    ### 📍 Phase 2: Staff & Table Management
+    ###📍 Phase 2: Staff & Table Management
         🔹 Goal: Manage staff and tables.
 
-        __ Tasks: __
+       __Tasks:__
             - Staff Management (CRUD for users, assign roles).
             - Table Management
                 - CRUD for tables (number, capacity, zone).
@@ -166,10 +166,10 @@
         ✅ Deliverable: Admin can create tables, assign waiters, and see reservation dashboard.
 
 
-    ### 📍 Phase 3: Menu & Product Management
+    ###📍 Phase 3: Menu & Product Management
         🔹 Goal: Manage restaurant menu items.
 
-        __ Tasks: __
+       __Tasks:__
             - Categories (Starters, Drinks, Main Course, etc.).
             - Products CRUD (name, description, price, availability).
             - Add-ons & Modifiers (extra cheese, toppings).
@@ -177,10 +177,10 @@
             - Menu display in frontend with category filtering.
         ✅ Deliverable: Admin can manage menu; POS can display all menu items.
 
-    ### 📍 Phase 4: Order Management
+    ###📍 Phase 4: Order Management
         🔹 Goal: Enable waiters to take orders.
 
-        __ Tasks: __
+       __Tasks:__
             - Create Order → select table, assign waiter, add items.
             - Update Order → add/remove items, change qty.
             - Transfer order → move to another table.
@@ -188,10 +188,10 @@
             - Kitchen Order Ticket (KOT) auto-generated on order confirm.
         ✅ Deliverable: Waiter can take table orders, and kitchen staff sees them.
 
-    ### 📍 Phase 5: Kitchen Management (KDS)
+    ###📍 Phase 5: Kitchen Management (KDS)
         🔹 Goal: Kitchen staff can manage cooking flow.
 
-        __ Tasks: __
+       __Tasks:__
             - Kitchen Display Screen (KDS) → show pending orders.
             - Order Status flow → Pending → Cooking → Ready → Served.
             - Auto notifications when order ready.
@@ -200,7 +200,7 @@
     ###📍 Phase 6: Billing & Payments
         🔹 Goal: Complete the order lifecycle with billing.
 
-        __ Tasks: __
+       __Tasks:__
             - Apply tax, service charge, discounts.
             - Multiple payment methods (cash, card, mobile wallet).
             - Split bills (by seat or by item).
@@ -209,10 +209,10 @@
         ✅ Deliverable: POS can generate bills and record payments.
 
 
-    ### 📍 Phase 6: Billing & Payments
+    ###📍 Phase 6: Billing & Payments
         🔹 Goal: Complete the order lifecycle with billing.
 
-        __ Tasks: __
+       __Tasks:__
             - Apply tax, service charge, discounts.
             - Multiple payment methods (cash, card, mobile wallet).
             - Split bills (by seat or by item).
@@ -221,10 +221,10 @@
         ✅ Deliverable: POS can generate bills and record payments.
 
 
-    ### 📍 Phase 7: Inventory & Stock
+    ###📍 Phase 7: Inventory & Stock
         🔹 Goal: Track stock usage and manage purchases.
 
-        __ Tasks: __
+       __Tasks:__
             - Manage ingredients/stock items.
             - Recipe-based stock deduction when items ordered.
             - Low stock alerts.
@@ -233,10 +233,10 @@
         ✅ Deliverable: Inventory auto-reduces when food is sold.
 
 
-    ### 📍 Phase 8: Reports & Analytics
+    ###📍 Phase 8: Reports & Analytics
         🔹 Goal: Business insights.
 
-        __ Tasks: __
+       __Tasks:__
             - Sales reports (daily, weekly, monthly).
             - Waiter performance (orders served, tips collected).
             - Kitchen performance (prep time).
@@ -245,10 +245,10 @@
         ✅ Deliverable: Admin dashboard with full analytics.
 
 
-    ### 📍 Phase 9: Advanced Features
+    ###📍 Phase 9: Advanced Features
         🔹 Optional but powerful add-ons.
 
-        __ Tasks: __
+       __Tasks:__
             - Customer QR code ordering (scan QR → view menu → place order).
             - Loyalty program (points, coupons).
             - Multi-branch management (franchise setup).
@@ -259,7 +259,7 @@
 
 
 
-    ### 📐 Suggested Build Order (Milestones)
+    ###📐 Suggested Build Order (Milestones)
         - Core Auth & RBAC → Phase 1
         - Tables + Waiters → Phase 2
         - Menu + Products → Phase 3
@@ -342,7 +342,7 @@
 
 ## 🍽️ Restaurant POS – Database Schema (ERD)
 
-    __ 1. User & Roles __
+   __1. User & Roles__
 
 ```markdown
     ## roles
@@ -362,7 +362,7 @@
     updated_at
 ```
 
-    __ 2. Table Management _-
+   __2. Table Management _-
 
 ```markdown
     tables
@@ -388,7 +388,7 @@
     updated_at
 ```
 
-    __ 3. Menu & Products __
+   __3. Menu & Products__
 
 ```markdown
     categories
@@ -438,7 +438,7 @@
     quantity
 ```
 
-    __ 4. Orders __
+   __4. Orders__
 
 ```markdown
     orders
@@ -462,7 +462,7 @@
     status (pending, cooking, ready, served)
 ```
 
-    __ 5. Payments __
+   __5. Payments__
 
 ```markdown
     payments
@@ -489,7 +489,7 @@
     updated_at
 ```
 
-    __ 6. Kitchen Management __
+   __6. Kitchen Management__
 
 ```markdown
     kitchen_orders
@@ -502,7 +502,7 @@
     finished_at
 ```
 
-    ___ 7. Inventory & Stock __
+   ___7. Inventory & Stock__
 
 ```markdown
     ingredients
@@ -924,7 +924,7 @@ export class TablesModule {}
 
 ## 🍽️ Table Management – Task List
 
-    ### 1. Database & Entity Setup
+    ###1. Database & Entity Setup
 
         - Create tables entity/model in PostgreSQL with fields:
             - id (PK)
@@ -937,7 +937,7 @@ export class TablesModule {}
         - Seed initial tables (e.g., 20 tables).
 
 
-    ### 2. Backend (NestJS) – API Development
+    ###2. Backend (NestJS) – API Development
 
         - Create Table APIs:
             - POST /tables → Add new table
@@ -958,7 +958,7 @@ export class TablesModule {}
             - When a waiter opens an order → link it to a table
             - When the order is closed → free the table
 
-    ### 3. Frontend (NextJS) – UI/UX
+    ###3. Frontend (NextJS) – UI/UX
 
         - Table Dashboard (Grid View):
             - Show all tables in a visual grid/floor plan
@@ -983,7 +983,7 @@ export class TablesModule {}
             - Allow admin to rearrange tables visually
 
 
-    ### 4. Extra Features (Advanced)
+    ###4. Extra Features (Advanced)
 
         🔄 Auto Refresh Table Status (WebSockets/Socket.io for real-time updates)
         📱 QR Code per Table → customer can scan & view menu/order
@@ -993,7 +993,7 @@ export class TablesModule {}
             - Average dining time
             - Most used tables/zones
 
-    ### 5. Task Breakdown (Project Steps)
+    ###5. Task Breakdown (Project Steps)
         - DB Migration – Create tables table
         - NestJS Table Module – CRUD + status APIs
         - NextJS Table Dashboard – Grid display with status colors
